@@ -1,0 +1,7 @@
+body {
+    background-color: white;
+    font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overscroll-behavior: none;
+    padding-top: 64px;
+    position: relative;
+}
