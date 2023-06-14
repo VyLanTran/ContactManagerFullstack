@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-
 export const Login = () => {
 
     const [email, setEmail] = useState('')
@@ -23,7 +22,6 @@ export const Login = () => {
         }
         catch (error) {
             setMessage(error.response.data["message"])
-            // console.log(error)
         }
     }
 
@@ -32,10 +30,18 @@ export const Login = () => {
             <div className='fixed w-[450px] h-[580px] border border-gray-300   mt-[30px]'>
 
                 <div className='w-[320px] mx-auto py-10'>
-                    <div className='flex justify-between text-[20px] pb-24'>
+                    <div className='flex justify-between text-[20px] pb-12'>
                         <Link to='/register'><div className='text-gray-500'>Register</div></Link>
                         <Link to='/'><div className='font-bold'>Login</div></Link>
                     </div>
+
+                    <div className='mb-10 flex items-center justify-center '>
+                        <a href="https://github.com/VyLanTran/ContactManagerFullstack"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer', fontSize: '16px' }}>Github code</a>
+                    </div>
+
                     <div>
                         {message ? <p className='py-3 text-red-600'>{message}</p> : null}
                         <form onSubmit={handleSubmit} className='flex flex-col'>
@@ -58,7 +64,7 @@ export const Login = () => {
                             </div>
                         </form>
                     </div>
-                    <div className='text-xs flex flex-col justify-center items-center pt-[150px]'>Privacy &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; About</div>
+                    <div className='text-xs flex flex-col justify-center items-center pt-[120px]'>Privacy &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; About</div>
                 </div>
             </div>
         </div>
