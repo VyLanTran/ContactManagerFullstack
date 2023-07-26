@@ -3,8 +3,11 @@ import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { TiArrowBack } from 'react-icons/ti';
+import { useBaseUrl } from '../context/BaseUrlContext';
 
 export const ViewContact = () => {
+
+    const baseUrl = useBaseUrl();
 
     const { contactID, accountID } = useParams();
     const [contact, setContact] = useState({});
@@ -25,7 +28,7 @@ export const ViewContact = () => {
     useEffect(() => {
         const fetchContact = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/contacts/${accountID}/${contactID}`);
+                const response = await axios.get(`${baseUrl}/contacts/${accountID}/${contactID}`);
                 setContact(response.data);
 
 
@@ -63,7 +66,7 @@ export const ViewContact = () => {
     const deleteContact = async (event) => {
         event.preventDefault();
         try {
-            const res = await axios.delete(`http://localhost:3001/contacts/deleteContact/${accountID}/${contactID}`);
+            const res = await axios.delete(`${baseUrl}/contacts/deleteContact/${accountID}/${contactID}`);
             navigate(`/${accountID}/contacts`);
         } catch (error) {
             console.log(error)

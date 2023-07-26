@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useBaseUrl } from "../context/BaseUrlContext"
 
 export const AddContact = () => {
+
+    const baseUrl = useBaseUrl();
 
     const navigate = useNavigate();
     const { accountID } = useParams();
@@ -10,7 +13,7 @@ export const AddContact = () => {
     const [contactID, setContactID] = useState('');
     const [complete, setComplete] = useState(false);
     const location = useLocation();
-    
+
     const [contact, setContact] = useState({
         firstName: "",
         lastName: "",
@@ -37,7 +40,7 @@ export const AddContact = () => {
         event.preventDefault();
         setMessage('');
         try {
-            const res = await axios.post('http://localhost:3001/contacts/addContact',
+            const res = await axios.post(`${baseUrl}/contacts/addContact`,
                 {
                     accountID,
                     contactObject: contact

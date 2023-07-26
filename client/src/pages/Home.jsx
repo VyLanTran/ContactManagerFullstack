@@ -3,8 +3,12 @@ import { AiOutlinePlus, AiFillEye } from 'react-icons/ai';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useBaseUrl } from '../context/BaseUrlContext';
 
 export const Home = () => {
+
+
+    const baseUrl = useBaseUrl();
 
     const { accountID } = useParams();
     const [contactList, setContactList] = useState([]);
@@ -12,7 +16,7 @@ export const Home = () => {
     useEffect(() => {
         const fetchContactList = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/contacts/${accountID}`);
+                const response = await axios.get(`${baseUrl}/contacts/${accountID}`);
                 setContactList(response.data);
             } catch (err) {
                 console.error(err);
@@ -25,7 +29,7 @@ export const Home = () => {
 
     const deleteContact = async (contactID) => {
         try {
-            await axios.delete(`http://localhost:3001/contacts/deleteContact/${accountID}/${contactID}`);
+            await axios.delete(`${baseUrl}/contacts/deleteContact/${accountID}/${contactID}`);
             setContactList((prevState) => prevState.filter((contact) => contact._id !== contactID));
         } catch (error) {
             console.log(error)

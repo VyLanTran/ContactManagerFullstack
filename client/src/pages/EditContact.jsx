@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useBaseUrl } from '../context/BaseUrlContext';
 
 export const EditContact = () => {
+
+    const baseUrl = useBaseUrl();
 
     const navigate = useNavigate();
     const { accountID, contactID } = useParams();
@@ -13,7 +16,7 @@ export const EditContact = () => {
     useEffect(() => {
         const fetchContact = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/contacts/${accountID}/${contactID}`);
+                const response = await axios.get(`${baseUrl}/contacts/${accountID}/${contactID}`);
                 setContact(response.data);
             } catch (err) {
                 console.error(err);
@@ -33,7 +36,7 @@ export const EditContact = () => {
         event.preventDefault();
         setMessage('');
         try {
-            const response = await axios.put(`http://localhost:3001/contacts/editContact/{accountID}/${contactID}`, { updatedContact: contact });
+            const response = await axios.put(`${baseUrl}/contacts/editContact/{accountID}/${contactID}`, { updatedContact: contact });
             setMessage("Contact updated successfully");
         } catch (err) {
             setMessage("Edit failed");

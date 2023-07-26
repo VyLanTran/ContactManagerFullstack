@@ -2,8 +2,11 @@ import React from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useBaseUrl } from '../context/BaseUrlContext'
 
 export const Register = () => {
+
+    const baseUrl = useBaseUrl();
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -14,7 +17,7 @@ export const Register = () => {
         e.preventDefault()
         setMessage('')
         try {
-            const res = await axios.post("http://localhost:3001/register", {
+            const res = await axios.post(`${baseUrl}/register`, {
                 email,
                 password,
             });
