@@ -1,3 +1,3 @@
 # ContactManagerFullstack
 
-This is the URL to go to my app: https://contact-manager-fullstack.vercel.app/
+Let's checkout the app here: https://circle-me.vercel.app/
