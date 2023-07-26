@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import { AccountModel } from '../models/AccountModel.js';
 
 const accountRouter = express.Router();
@@ -14,7 +14,7 @@ accountRouter.post('/', async (req, res) => {
         return res.status(404).json({ message: "This email is not found" });
     }
 
-    const valid = await bcrypt.compare(password, account.password);
+    const valid = await bcryptjs.compare(password, account.password);
 
     if (!valid) {
         return res.status(401).json({ message: "Incorrect password" });
@@ -40,7 +40,7 @@ accountRouter.post('/register', async (req, res) => {
     }
 
     // Create new account if not existed
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
     const newAccount = AccountModel({ email, password: hashedPassword });
     try {
         await newAccount.save();
